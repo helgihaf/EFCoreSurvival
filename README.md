@@ -52,3 +52,8 @@ dotnet ef migrations remove
 dotnet ef migrations add MyInitialMigrationYeah
 ```
 
+## Drop Database
+Useful for new development when you have already applied your initial migration.
+```powershell
+dotnet ef database drop
+```
