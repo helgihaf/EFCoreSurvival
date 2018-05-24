@@ -14,6 +14,7 @@ Edit .csproj _where you want the migrations to reside_ and make sure you have th
 ## Step 2
 Install this package to the database project:
 ```powershell
+cd <to where my .csproj is>
 dotnet add package Microsoft.EntityFrameworkCore.Design 
 ```
 
@@ -48,7 +49,7 @@ namespace Marsonsoft.AM.Database
 }    
 ```
 ## Step 4
-### Either...
+### Option 1: SQL Server and appsettings.json
 If the project has an appsettings.json file, put the target connection string in there:
 ```json
 {
@@ -56,7 +57,7 @@ If the project has an appsettings.json file, put the target connection string in
     "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=ContosoUniversity2;Trusted_Connection=True;MultipleActiveResultSets=true"
 },
 ```
-### or:
+### Option 2: SQL Server and DbContext configuration
 Put this in your DbContext class:
 ```c#
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -64,6 +65,23 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     if (!optionsBuilder.IsConfigured)
     {
         optionsBuilder.UseMySql("Server=(localdb)\\mssqllocaldb;Database=ContosoUniversity2;Trusted_Connection=True;MultipleActiveResultSets=true ");
+    }
+}
+```
+### Option 3: SQLite and DbContext configuration
+Put this in your DbContext class:
+Install this packages to the database project:
+```powershell
+cd <to where my .csproj is>
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite  
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite.Design
+```
+```c#
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    if (!optionsBuilder.IsConfigured)
+    {
+        optionsBuilder.UseSqlite("Data Source=adventure.db");
     }
 }
 ```
