@@ -12,6 +12,42 @@ Edit .csproj _where you want the migrations to reside_ and make sure you have th
 </ItemGroup>
 ```
 ## Step 2
+Install this package to the database project:
+```powershell
+dotnet add package Microsoft.EntityFrameworkCore.Design 
+```
+
+## Step 3
+Create your Code-first database, for example:
+```C#
+namespace Marsonsoft.AM.Database
+{
+    public class Account
+    {
+        public long Id { get; set; }
+        public string Email { get; set; }
+        public string AuthenticationType { get; set; }
+        public string Token { get; set; }
+        public string RefreshToken { get; set; }
+    }
+}
+
+using Microsoft.EntityFrameworkCore;
+
+namespace Marsonsoft.AM.Database
+{
+    public class AdventureDbContext : DbContext
+    {
+        public AdventureDbContext(DbContextOptions<AdventureDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Account> Accounts { get; set; }
+    }
+}    
+```
+## Step 4
 ### Either...
 If the project has an appsettings.json file, put the target connection string in there:
 ```json
@@ -31,7 +67,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     }
 }
 ```
-## Step 3
+## Step 5
 Open cmd and cd into the same folder where your migration .csproj is and enter:
 ```powershell
 dotnet ef migrations add InitialCreate
