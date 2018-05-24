@@ -11,6 +11,8 @@ Edit .csproj _where you want the migrations to reside_ and make sure you have th
   <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
 </ItemGroup>
 ```
+The exact version for these references varies between releases of .NET Core. For me I simply use the latest version reported on nuget.org.
+
 ## Step 2
 Open cmd and cd into the same folder where your migration .csproj is and enter:
 ```powershell
