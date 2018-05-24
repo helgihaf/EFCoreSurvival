@@ -12,9 +12,8 @@ Edit .csproj _where you want the migrations to reside_ and make sure you have th
 </ItemGroup>
 ```
 ## Step 2
-Install this package to the database project:
+Open cmd and cd into the same folder where your migration .csproj is and enter:
 ```powershell
-cd <to where my .csproj is>
 dotnet add package Microsoft.EntityFrameworkCore.Design 
 ```
 
@@ -69,13 +68,13 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 }
 ```
 ### Option 3: SQLite and DbContext configuration
-Put this in your DbContext class:
-Install this packages to the database project:
+Open cmd and cd into the same folder where your migration .csproj is and enter:
 ```powershell
 cd <to where my .csproj is>
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite  
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite.Design
 ```
+Put this in your DbContext class:
 ```c#
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
